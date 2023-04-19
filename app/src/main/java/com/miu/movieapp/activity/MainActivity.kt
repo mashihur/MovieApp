@@ -14,8 +14,6 @@ class MainActivity : BaseActivity() {
     override fun onCreateActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        toastShort("hello")
-        toastLong("Bye")
 
         val adapter = MyPageAdapter(this)
         binding.viewPager.adapter = adapter
