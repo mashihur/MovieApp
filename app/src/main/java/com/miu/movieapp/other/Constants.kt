@@ -14,9 +14,9 @@ object Constants {
     )
 
     var videoNames = arrayOf(
-        R.raw.vid_avatar,
-        R.raw.vid_jumanji,
-        R.raw.vid_good_dino
+        "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",
+        "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",
+        "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"
     )
 
     var imgHangMan = arrayOf(

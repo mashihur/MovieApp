@@ -69,9 +69,9 @@ class GameFragment : BaseFragment() {
         }
     }
 
-    private fun playVideo(res: Int) {
+    private fun playVideo(url: String) {
         if (binding.videoplayer.isPlaying.not()) {
-            binding.videoplayer.setVideoURI(Uri.parse("android.resource://${context?.packageName}/${res}"))
+            binding.videoplayer.setVideoPath(url)
             binding.videoplayer.start()
             timer()
         }

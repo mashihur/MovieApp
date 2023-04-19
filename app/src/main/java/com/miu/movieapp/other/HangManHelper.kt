@@ -10,7 +10,7 @@ class HangManHelper {
     private val maxTries = Constants.imgHangMan.size
     private var currentTries = 0
     private var drawable: Int = Constants.imgHangMan[0]
-    var drawableVideo: Int = R.raw.vid_avatar
+    var drawableVideo: String = ""
 
     fun startNewGame(): GameState {
         currentTries = 0
