@@ -20,6 +20,5 @@ abstract  class BaseFragment : Fragment() {
         rootView = inflater.inflate(getLayout(), container, false)
         return onCreateView()
     }
-
-
+    
 }

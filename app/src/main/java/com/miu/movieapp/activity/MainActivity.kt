@@ -5,6 +5,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.miu.movieapp.R
 import com.miu.movieapp.adapter.MyPageAdapter
 import com.miu.movieapp.databinding.ActivityMainBinding
+import com.miu.movieapp.other.toastLong
+import com.miu.movieapp.other.toastShort
 
 class MainActivity : BaseActivity() {
     lateinit var binding : ActivityMainBinding
@@ -12,6 +14,8 @@ class MainActivity : BaseActivity() {
     override fun onCreateActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        toastShort("hello")
+        toastLong("Bye")
 
         val adapter = MyPageAdapter(this)
         binding.viewPager.adapter = adapter
