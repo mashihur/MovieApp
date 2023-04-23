@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.miu.movieapp.R
 import com.miu.movieapp.data.local.MovieDatabase
-import com.miu.movieapp.data.local.db.MovieItem
+import com.miu.movieapp.data.local.MovieItem
 import com.miu.movieapp.databinding.FragmentFavoriteBinding
 import com.miu.movieapp.other.toastShort
 import kotlinx.coroutines.launch
