@@ -104,6 +104,13 @@ class GameFragment : BaseFragment() {
         binding.webview.onResume()
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) binding.webview.onResume()
+        else binding.webview.onPause()
+
+    }
+
     override fun onPause() {
         super.onPause()
         binding.webview.onPause()

@@ -1,6 +1,8 @@
 package com.miu.movieapp.data.remote
 
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieApi {
     @GET("movie/now_playing?api_key=${Constants.API_KEY}")
@@ -11,4 +13,8 @@ interface MovieApi {
 
     @GET("movie/top_rated?api_key=${Constants.API_KEY}")
     suspend fun getTopRatedMovies(): MovieResponse
+
+    //to get trailer video for selected movie
+    @GET("movie/{movieId}/videos?api_key=${Constants.API_KEY}")
+    suspend fun getVideoTrailers(@Path("id") id: Int): VideoResponse
 }
