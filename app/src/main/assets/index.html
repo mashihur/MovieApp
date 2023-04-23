@@ -18,7 +18,7 @@
       width: '640',
       videoId: videoId,
       playerVars: {
-        'playsinline': 1
+        'playsinline': 1, 'controls': 0, 'modestbranding': 1, 'start': 10
       },
       events: {
         'onReady': onPlayerReady,
@@ -29,8 +29,8 @@
   
   // 4. The API will call this function when the video player is ready.
   function onPlayerReady(event) {
-    player.loadVideoById(videoId, 10, "large")
     event.target.playVideo();
+    //player.seekTo(10, false)
   }
 
   var done = false

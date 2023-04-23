@@ -94,6 +94,7 @@ class GameFragment : BaseFragment() {
         }
         val uri = Uri.parse(gameHelper.drawableVideo)
         val youtubeid = uri.getQueryParameter("v") ?: "-"
+        binding.webview.loadUrl("about:blank")
         binding.webview.loadUrl("file:///android_asset/index.html?v=$youtubeid")
         updateUI(gameState)
     }
