@@ -2,53 +2,61 @@
 <html>
 
 <script>
-      var tag = document.createElement('script');
-      var videoId = (new URLSearchParams(window.location.search)).get('v')
-      //var videoId = 'tRysYmFkFQc' //testing
+  var tag = document.createElement('script');
+  var videoId = (new URLSearchParams(window.location.search)).get('v')
+  //var videoId = 'tRysYmFkFQc' //testing
 
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: videoId,
-          playerVars: {
-            'playsinline': 1
-          },
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
+  
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: videoId,
+      playerVars: {
+        'playsinline': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
       }
-      
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
+    });
+  }
+  
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    player.loadVideoById(videoId, 10, "large")
+    event.target.playVideo();
+  }
 
-      
-      function onPlayerStateChange(event) {
-        //if (event.data == YT.PlayerState.PLAYING && !done) {
-          //setTimeout(playVideo, 1000);
-          //done = true;
-        //}
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
+  var done = false
+  var isFinished = false
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING && !done && !isFinished) {
+      setTimeout(stopVideo, 15000);
+      done = true;
+    }
+  }
+  function stopVideo() {
+    if (!isFinished) {
+      //player.stopVideo();
+      player.loadVideoById(videoId, 10, "large")
+      setTimeout(stopVideo, 15000);
+    }
+    
+  }
 
-      function playVideo() {
-            //auto play video is not working 
-            player.playVideo();
-      }
-      
-    </script>
+  function endVideo() {
+    isFinished = true
+    player.stopVideo();
+  }
+  
+</script>
+  
   <body>
     <div id="player"></div>
   </body>

@@ -2,28 +2,17 @@ package com.miu.movieapp.fragment
 
 import android.content.DialogInterface
 import android.net.Uri
-import androidx.fragment.app.Fragment
 import android.view.View
+import android.webkit.WebViewClient
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentGameBinding
-import com.miu.movieapp.other.Constants
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.HangManHelper
-import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameFragment : BaseFragment() {
     lateinit var binding : FragmentGameBinding
     private val gameHelper = HangManHelper()
@@ -35,13 +24,15 @@ class GameFragment : BaseFragment() {
     }
 
     fun initCommon() {
+        binding.webview.settings.javaScriptEnabled = true
+        binding.webview.webViewClient = WebViewClient()
+        binding.webview.settings.mediaPlaybackRequiresUserGesture = false
+
         binding.btnStartNew.setOnClickListener {
             startNewGame()
         }
 
-        var gameState = gameHelper.startNewGame()
-        updateUI(gameState)
-
+        startNewGame()
         binding.lettersLayout.children.forEach { letterView ->
             if (letterView is TextView) {
                 letterView.setOnClickListener {
@@ -63,48 +54,21 @@ class GameFragment : BaseFragment() {
             is GameState.Running -> {
                 binding.userinput.text = gameState.underscoreWord
                 binding.imageview.setImageResource(gameState.drawable)
-                playVideo(gameHelper.drawableVideo)
             }
             is GameState.Won -> showGameWon(gameState.wordToGuess)
         }
     }
 
-    private fun playVideo(url: String) {
-        if (binding.videoplayer.isPlaying.not()) {
-            binding.videoplayer.setVideoPath(url)
-            binding.videoplayer.start()
-            timer()
-        }
-    }
-
-    //below function to play trailer only 10 seconds
-    private fun timer() {
-        Timer().scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                try {
-                    val seconds = (binding.videoplayer.currentPosition % (1000 * 60 * 60) % (1000 * 60) / 1000) as Int
-                    if (seconds > Constants.trailerSeconds) {
-                        //binding.videoplayer.stopPlayback()
-                        binding.videoplayer.seekTo(0)
-                        binding.videoplayer.start()
-                    }
-
-                } catch (e: Exception) {
-                }
-            }
-        }, 0, 1000)
-    }
-
     private fun showGameLost(wordToGuess: String) {
         showAlert("Unfortunately!!!" , "You Lost")
-        binding.videoplayer.stopPlayback()
+        binding.webview.loadUrl("javascript:endVideo();");
         binding.userinput.text = wordToGuess
         binding.lettersLayout.visibility = View.GONE
     }
 
     private fun showGameWon(wordToGuess: String) {
         showAlert("Hooray!!!" , "You won")
-        binding.videoplayer.stopPlayback()
+        binding.webview.loadUrl("javascript:endVideo();");
         binding.userinput.text = wordToGuess
         binding.lettersLayout.visibility = View.GONE
     }
@@ -122,22 +86,25 @@ class GameFragment : BaseFragment() {
     }
 
     private fun startNewGame() {
-        binding.videoplayer.stopPlayback()
+        //binding.videoplayer.stopPlayback()
         val gameState = gameHelper.startNewGame()
         binding.lettersLayout.visibility = View.VISIBLE
         binding.lettersLayout.children.forEach { letterView ->
             letterView.visibility = View.VISIBLE
         }
+        val uri = Uri.parse(gameHelper.drawableVideo)
+        val youtubeid = uri.getQueryParameter("v") ?: "-"
+        binding.webview.loadUrl("file:///android_asset/index.html?v=$youtubeid")
         updateUI(gameState)
     }
 
     override fun onResume() {
         super.onResume()
-        binding.videoplayer.start()
+        binding.webview.onResume()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.videoplayer.stopPlayback()
+    override fun onPause() {
+        super.onPause()
+        binding.webview.onPause()
     }
 }

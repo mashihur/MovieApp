@@ -2,25 +2,17 @@ package com.miu.movieapp.fragment
 
 
 import android.content.DialogInterface
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentSciBinding
-import com.miu.movieapp.other.Constants
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.HangManHelper
-import java.util.*
 import kotlin.random.Random
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SciFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SciFragment : BaseFragment() {
     // TODO: Rename and change types of parameters
     lateinit var binding : FragmentSciBinding
@@ -60,7 +52,6 @@ class SciFragment : BaseFragment() {
                 }
             }
         }
-
     }
 
     private fun updateUI(gameState: GameState) {
@@ -69,13 +60,10 @@ class SciFragment : BaseFragment() {
             is GameState.Running -> {
                 binding.userinput.text = gameState.underscoreWord
                 binding.imageview.setImageResource(gameState.drawable)
-
             }
             is GameState.Won -> showGameWon(gameState.wordToGuess)
         }
     }
-
-
 
     private fun showGameLost(wordToGuess: String) {
         showAlert("Unfortunately!!!" , "You Lost")

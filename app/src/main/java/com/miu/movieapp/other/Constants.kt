@@ -10,13 +10,23 @@ object Constants {
     var movieNames = arrayOf(
         "avatar",
         "jumanji",
-        "good dino of"
+        "good dino",
+        "moana",
+        "frozen",
+        "hulk",
+        "doctor strange",
+        "the mummy"
     )
 
     var videoNames = arrayOf(
-        "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",
-        "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4",
-        "https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4"
+        "https://www.youtube.com/watch?v=5PSNL1qE6VY",
+        "https://www.youtube.com/watch?v=2QKg5SZ_35I",
+        "https://www.youtube.com/watch?v=O-RgquKVTPE&t=5s",
+        "https://www.youtube.com/watch?v=LKFuXETZUsI",
+        "https://www.youtube.com/watch?v=FLzfXQSPBOg",
+        "https://www.youtube.com/watch?v=2ErnLuJKQA4",
+        "https://www.youtube.com/watch?v=HSzx-zryEgM",
+        "https://www.youtube.com/watch?v=f7oKxlaUBac"
     )
 
     var imgHangMan = arrayOf(
