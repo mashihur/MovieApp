@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miu.movieapp.adapter.MovieAdapter
-import com.miu.movieapp.data.Movie
+import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ItemMoviesBinding
 
 abstract class MovieViewHolder(
@@ -13,7 +13,7 @@ abstract class MovieViewHolder(
     @get:StringRes
     protected abstract val category: Int
 
-    fun bindView(movies: List<Movie>) {
+    fun bindView(movies: List<MovieEntity>) {
         with(binding) {
             tvTitle.text = itemView.context.getString(category)
             rvMovie.layoutManager =

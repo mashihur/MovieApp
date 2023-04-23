@@ -10,17 +10,17 @@ class MovieRepository(
     private val movieApi: MovieApi,
     private val ioDispatcher: CoroutineDispatcher
 ) {
-    fun getNowPlayingMovies(): Flow<List<Movie>> = flow {
+    fun getNowPlayingMovies(): Flow<List<MovieEntity>> = flow {
         emit(movieApi.getNowPlayingMovies().results)
     }
         .flowOn(ioDispatcher)
 
-    fun getPopularMovies(): Flow<List<Movie>> = flow {
+    fun getPopularMovies(): Flow<List<MovieEntity>> = flow {
         emit(movieApi.getPopularMovies().results)
     }
         .flowOn(ioDispatcher)
 
-    fun getTopRatedMovies(): Flow<List<Movie>> = flow {
+    fun getTopRatedMovies(): Flow<List<MovieEntity>> = flow {
         emit(movieApi.getTopRatedMovies().results)
     }
         .flowOn(ioDispatcher)

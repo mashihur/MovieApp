@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.miu.movieapp.data.Movie
+import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ItemMovieBinding
 
-class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(MovieDiffCallBack()) {
+class MovieAdapter : ListAdapter<MovieEntity, MovieAdapter.ViewHolder>(MovieDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +24,7 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(MovieDiffCallBa
     class ViewHolder(
         private val binding: ItemMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bindView(movie: Movie) {
+        fun bindView(movie: MovieEntity) {
             with(binding) {
                 tvTitle.text = movie.title
                 Glide.with(itemView)
@@ -34,12 +34,12 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(MovieDiffCallBa
         }
     }
 
-    private class MovieDiffCallBack : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+    private class MovieDiffCallBack : DiffUtil.ItemCallback<MovieEntity>() {
+        override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
             return oldItem == newItem
         }
     }

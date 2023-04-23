@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Movie(
+data class MovieEntity(
     @field:Json(name = "adult")
     val adult: Boolean,
     @field:Json(name = "backdrop_path")
