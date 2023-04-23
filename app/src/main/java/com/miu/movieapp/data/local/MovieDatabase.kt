@@ -1,9 +1,11 @@
-package com.miu.movieapp.db
+package com.miu.movieapp.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.miu.movieapp.data.local.db.MovieDao
+import com.miu.movieapp.data.local.db.MovieItem
 
 
 @Database(

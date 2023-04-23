@@ -1,4 +1,4 @@
-package com.miu.movieapp.db
+package com.miu.movieapp.data.local.db
 
 import androidx.room.*
 
@@ -8,13 +8,17 @@ import androidx.room.*
 @Dao
 interface MovieDao {
     @Insert
-    suspend fun addNote(note:MovieItem)
+    suspend fun addNote(note: MovieItem)
+
     @Query("SELECT * FROM MOVIEITEM ORDER BY id DESC")
-    suspend fun getAllNotes():List<MovieItem>
+    suspend fun getAllNotes(): List<MovieItem>
+
     @Insert
     suspend fun addMultipleNotes(vararg note: MovieItem)
+
     @Update
-    suspend fun updateNote(enote:MovieItem)
+    suspend fun updateNote(enote: MovieItem)
+
     @Delete
     suspend fun deleteNote(note: MovieItem)
 }

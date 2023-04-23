@@ -1,4 +1,4 @@
-package com.miu.movieapp.db
+package com.miu.movieapp.data.local.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
