@@ -32,6 +32,10 @@ class MainActivity : BaseActivity() {
                     tab.text = resources.getString(R.string.game)
                     tab.setIcon(R.drawable.baseline_game_24)
                 }
+                3->{
+                    tab.text = resources.getString(R.string.sci)
+                    tab.setIcon(R.drawable.baseline_game_24)
+                }
             }
         }.attach()
     }

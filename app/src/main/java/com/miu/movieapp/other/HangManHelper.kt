@@ -22,6 +22,14 @@ class HangManHelper {
         return getGameState()
     }
 
+    fun startSCIGame(word: String): GameState {
+        currentTries = 0
+        drawable = Constants.imgHangMan[0]
+        wordToGuess = word
+        generateUnderscores(wordToGuess)
+        return getGameState()
+    }
+
     private fun generateUnderscores(word: String) {
         val sb = StringBuilder()
         word.forEach { char ->

@@ -3,5 +3,46 @@
     <string name="movie">Movie</string>
     <string name="favorite">Favorite</string>
     <string name="game">Game</string>
+    <string name="sci">SCI</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="principles">
+        <item>The Nature of life is to ____.</item>
+        <item>_____ is present everywhere.</item>
+        <item>Life is found in ______.</item>
+        <item>Outer depends on _____.</item>
+        <item>Seek the _______ first.</item>
+        <item>____ and activity are the steps to progress</item>
+        <item>Enjoy greater __________ and accomplish more</item>
+        <item>Every action has a ________</item>
+        <item>_____________ leads to progres</item>
+        <item>The field of all possibilities is the source of all _________.</item>
+        <item>_______ leads to action, action leads to achievement, achievement leads to fulfillment.</item>
+        <item>Knowledge is gained from inside and _______.</item>
+        <item>Knowledge is structured in _____________.</item>
+        <item>_______ exists in diversity.</item>
+        <item>_____ is contained in every part</item>
+        <item>The whole is greater than the sum of the _____</item>
+    </string-array>
+
+    <string-array name="principlesAnswers">
+        <item>grow</item>
+        <item>Order</item>
+        <item>layers</item>
+        <item>inner</item>
+        <item>highest</item>
+        <item>Rest</item>
+        <item>efficiency</item>
+        <item>reaction</item>
+        <item>Purification</item>
+        <item>solutions</item>
+        <item>Thought</item>
+        <item>outside</item>
+        <item>consciousness</item>
+        <item>Harmony</item>
+        <item>Whole</item>
+        <item>parts</item>
+    </string-array>
 
 </resources>
