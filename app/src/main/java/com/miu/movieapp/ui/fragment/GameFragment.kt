@@ -1,48 +1,38 @@
-package com.miu.movieapp.fragment
-
+package com.miu.movieapp.ui.fragment
 
 import android.content.DialogInterface
+import android.net.Uri
 import android.view.View
+import android.webkit.WebViewClient
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import com.miu.movieapp.R
-import com.miu.movieapp.databinding.FragmentSciBinding
+import com.miu.movieapp.databinding.FragmentGameBinding
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.HangManHelper
-import kotlin.random.Random
 
 
-class SciFragment : BaseFragment() {
-    // TODO: Rename and change types of parameters
-    lateinit var binding : FragmentSciBinding
+class GameFragment : BaseFragment() {
+    lateinit var binding : FragmentGameBinding
     private val gameHelper = HangManHelper()
-    var principleNames = mutableListOf("")
-    var principleAns = mutableListOf("")
-    var currentIndex = 0
-
 
     override fun onCreateView(): View {
-        binding = FragmentSciBinding.bind(rootView)
+        binding = FragmentGameBinding.bind(rootView)
         initCommon()
         return binding.root
     }
 
-    override fun getLayout(): Int {
-        return R.layout.fragment_sci
-    }
-
     fun initCommon() {
-
-        principleNames = requireContext().resources.getStringArray(R.array.principles).toMutableList()
-        principleAns = requireContext().resources.getStringArray(R.array.principlesAnswers).toMutableList()
+        binding.webview.settings.javaScriptEnabled = true
+        binding.webview.webViewClient = WebViewClient()
+        binding.webview.settings.mediaPlaybackRequiresUserGesture = false
 
         binding.btnStartNew.setOnClickListener {
             startNewGame()
         }
 
         startNewGame()
-
         binding.lettersLayout.children.forEach { letterView ->
             if (letterView is TextView) {
                 letterView.setOnClickListener {
@@ -52,6 +42,10 @@ class SciFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.fragment_game
     }
 
     private fun updateUI(gameState: GameState) {
@@ -67,14 +61,14 @@ class SciFragment : BaseFragment() {
 
     private fun showGameLost(wordToGuess: String) {
         showAlert("Unfortunately!!!" , "You Lost")
-        principleAns.removeAt(currentIndex)
+        binding.webview.loadUrl("javascript:endVideo();")
         binding.userinput.text = wordToGuess
         binding.lettersLayout.visibility = View.GONE
     }
 
     private fun showGameWon(wordToGuess: String) {
         showAlert("Hooray!!!" , "You won")
-        principleAns.removeAt(currentIndex)
+        binding.webview.loadUrl("javascript:endVideo();")
         binding.userinput.text = wordToGuess
         binding.lettersLayout.visibility = View.GONE
     }
@@ -92,13 +86,33 @@ class SciFragment : BaseFragment() {
     }
 
     private fun startNewGame() {
-        currentIndex = Random.nextInt(0, principleAns.size)
-        val gameState = gameHelper.startSCIGame(principleAns[currentIndex])
-        binding.hintWord.text = principleNames[currentIndex]
+        //binding.videoplayer.stopPlayback()
+        val gameState = gameHelper.startNewGame()
         binding.lettersLayout.visibility = View.VISIBLE
         binding.lettersLayout.children.forEach { letterView ->
             letterView.visibility = View.VISIBLE
         }
+        val uri = Uri.parse(gameHelper.drawableVideo)
+        val youtubeid = uri.getQueryParameter("v") ?: "-"
+        binding.webview.loadUrl("about:blank")
+        binding.webview.loadUrl("file:///android_asset/index.html?v=$youtubeid")
         updateUI(gameState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.webview.onResume()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) binding.webview.onResume()
+        else binding.webview.onPause()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.webview.onPause()
     }
 }

@@ -1,10 +1,8 @@
-package com.miu.movieapp.activity
+package com.miu.movieapp.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.MediaController
-import com.miu.movieapp.R
+import androidx.appcompat.app.AppCompatActivity
 import com.miu.movieapp.databinding.ActivityMovieDetailBinding
 
 class MovieDetailActivity : AppCompatActivity() {

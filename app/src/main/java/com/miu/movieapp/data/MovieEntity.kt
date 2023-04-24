@@ -1,10 +1,12 @@
 package com.miu.movieapp.data
 
 import android.os.Parcelable
+import androidx.room.Entity
 import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity
 data class MovieEntity(
     @field:Json(name = "adult")
     val adult: Boolean,

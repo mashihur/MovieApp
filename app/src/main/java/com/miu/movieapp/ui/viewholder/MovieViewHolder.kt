@@ -1,11 +1,11 @@
-package com.miu.movieapp.viewholder
+package com.miu.movieapp.ui.viewholder
 
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.miu.movieapp.adapter.MovieAdapter
 import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ItemMoviesBinding
+import com.miu.movieapp.ui.adapter.MovieAdapter
 
 abstract class MovieViewHolder(
     private val binding: ItemMoviesBinding,

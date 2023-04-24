@@ -1,16 +1,16 @@
-package com.miu.movieapp.fragment
+package com.miu.movieapp.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.miu.movieapp.Graph
 import com.miu.movieapp.R
-import com.miu.movieapp.adapter.CategoryMovieAdapter
 import com.miu.movieapp.databinding.FragmentMovieBinding
+import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.viewModelProviderFactoryOf
-import com.miu.movieapp.viewmodel.MovieViewModel
+import com.miu.movieapp.ui.adapter.CategoryMovieAdapter
+import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 class MovieFragment : BaseFragment() {
     lateinit var binding: FragmentMovieBinding

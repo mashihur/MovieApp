@@ -1,4 +1,4 @@
-package com.miu.movieapp
+package com.miu.movieapp.other
 
 import com.miu.movieapp.data.MovieRepository
 import com.miu.movieapp.data.remote.RetrofitBuilder

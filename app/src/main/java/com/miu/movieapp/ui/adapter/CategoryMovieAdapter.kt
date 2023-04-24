@@ -1,4 +1,4 @@
-package com.miu.movieapp.adapter
+package com.miu.movieapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ItemMoviesBinding
-import com.miu.movieapp.uimodel.CategoryMovie
-import com.miu.movieapp.uimodel.MovieViewType
-import com.miu.movieapp.viewholder.MovieViewHolder
-import com.miu.movieapp.viewholder.NowPlayingMoviesViewHolder
-import com.miu.movieapp.viewholder.PopularMoviesViewHolder
-import com.miu.movieapp.viewholder.TopRatedMoviesViewHolder
+import com.miu.movieapp.ui.uimodel.CategoryMovie
+import com.miu.movieapp.ui.uimodel.MovieViewType
+import com.miu.movieapp.ui.viewholder.MovieViewHolder
+import com.miu.movieapp.ui.viewholder.NowPlayingMoviesViewHolder
+import com.miu.movieapp.ui.viewholder.PopularMoviesViewHolder
+import com.miu.movieapp.ui.viewholder.TopRatedMoviesViewHolder
 
 class CategoryMovieAdapter(
     private val onMovieClick: (MovieEntity) -> Unit

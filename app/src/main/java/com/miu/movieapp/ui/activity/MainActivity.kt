@@ -1,12 +1,10 @@
-package com.miu.movieapp.activity
+package com.miu.movieapp.ui.activity
 
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.miu.movieapp.R
-import com.miu.movieapp.adapter.MyPageAdapter
 import com.miu.movieapp.databinding.ActivityMainBinding
-import com.miu.movieapp.other.toastLong
-import com.miu.movieapp.other.toastShort
+import com.miu.movieapp.ui.adapter.MyPageAdapter
 
 class MainActivity : BaseActivity() {
     lateinit var binding : ActivityMainBinding

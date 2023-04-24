@@ -1,9 +1,9 @@
-package com.miu.movieapp.uimodel
+package com.miu.movieapp.ui.uimodel
 
 import androidx.annotation.IntDef
-import com.miu.movieapp.uimodel.MovieViewType.Companion.NOW_PLAYING
-import com.miu.movieapp.uimodel.MovieViewType.Companion.POPULAR
-import com.miu.movieapp.uimodel.MovieViewType.Companion.TOP_RATED
+import com.miu.movieapp.ui.uimodel.MovieViewType.Companion.NOW_PLAYING
+import com.miu.movieapp.ui.uimodel.MovieViewType.Companion.POPULAR
+import com.miu.movieapp.ui.uimodel.MovieViewType.Companion.TOP_RATED
 
 /**
  * Created by phatvt2 on 8/6/20

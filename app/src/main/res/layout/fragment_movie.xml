@@ -6,4 +6,4 @@
     android:layout_height="match_parent"
     android:background="@color/teal_200"
     android:padding="12dp"
-    tools:context=".fragment.MovieFragment" />
+    tools:context=".ui.fragment.MovieFragment" />

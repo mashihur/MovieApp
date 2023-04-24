@@ -1,4 +1,4 @@
-package com.miu.movieapp.uimodel
+package com.miu.movieapp.ui.uimodel
 
 import android.os.Parcelable
 import com.miu.movieapp.data.MovieEntity

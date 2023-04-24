@@ -1,4 +1,4 @@
-package com.miu.movieapp.fragment
+package com.miu.movieapp.ui.fragment
 
 import android.os.Bundle
 import android.view.View

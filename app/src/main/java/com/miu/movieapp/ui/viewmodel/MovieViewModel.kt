@@ -1,12 +1,12 @@
-package com.miu.movieapp.viewmodel
+package com.miu.movieapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.miu.movieapp.data.MovieRepository
-import com.miu.movieapp.uimodel.CategoryMovie
-import com.miu.movieapp.uimodel.MovieViewType
+import com.miu.movieapp.ui.uimodel.CategoryMovie
+import com.miu.movieapp.ui.uimodel.MovieViewType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map

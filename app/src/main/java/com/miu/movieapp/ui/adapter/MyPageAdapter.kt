@@ -1,12 +1,12 @@
-package com.miu.movieapp.adapter
+package com.miu.movieapp.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.miu.movieapp.fragment.FavoriteFragment
-import com.miu.movieapp.fragment.GameFragment
-import com.miu.movieapp.fragment.MovieFragment
-import com.miu.movieapp.fragment.SciFragment
+import com.miu.movieapp.ui.fragment.FavoriteFragment
+import com.miu.movieapp.ui.fragment.GameFragment
+import com.miu.movieapp.ui.fragment.MovieFragment
+import com.miu.movieapp.ui.fragment.SciFragment
 
 class MyPageAdapter(fActivity : FragmentActivity) : FragmentStateAdapter(fActivity) {
     override fun getItemCount() = 4

@@ -1,4 +1,4 @@
-package com.miu.movieapp.adapter
+package com.miu.movieapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
