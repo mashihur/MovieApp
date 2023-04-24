@@ -8,6 +8,7 @@ import com.miu.movieapp.data.MovieRepository
 import com.miu.movieapp.ui.uimodel.CategoryMovie
 import com.miu.movieapp.ui.uimodel.MovieViewType
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -57,6 +58,9 @@ class MovieViewModel(
         this.onEach {
             _categoryMovies.value = _categoryMovies.value.orEmpty().plus(it)
         }
+            .catch {
+                // TODO: handle error
+            }
             .launchIn(viewModelScope)
     }
 }
