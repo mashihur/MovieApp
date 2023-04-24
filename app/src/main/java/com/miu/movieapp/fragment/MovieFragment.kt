@@ -2,6 +2,7 @@ package com.miu.movieapp.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miu.movieapp.Graph
@@ -31,7 +32,11 @@ class MovieFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        movieCategoryAdapter = CategoryMovieAdapter()
+        movieCategoryAdapter = CategoryMovieAdapter(
+            onMovieClick = {
+                Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+            }
+        )
         binding.rvMovie.adapter = movieCategoryAdapter
         binding.rvMovie.layoutManager = LinearLayoutManager(requireContext())
         viewModel.categoryMovies.observe(viewLifecycleOwner) {

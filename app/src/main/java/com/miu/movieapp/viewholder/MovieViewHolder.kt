@@ -8,7 +8,8 @@ import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ItemMoviesBinding
 
 abstract class MovieViewHolder(
-    private val binding: ItemMoviesBinding
+    private val binding: ItemMoviesBinding,
+    private val onMovieClick: (MovieEntity) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     @get:StringRes
     protected abstract val category: Int
@@ -18,7 +19,7 @@ abstract class MovieViewHolder(
             tvTitle.text = itemView.context.getString(category)
             rvMovie.layoutManager =
                 LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-            rvMovie.adapter = MovieAdapter().apply {
+            rvMovie.adapter = MovieAdapter(onMovieClick).apply {
                 submitList(movies)
             }
         }

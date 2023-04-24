@@ -9,11 +9,17 @@ import com.bumptech.glide.Glide
 import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ItemMovieBinding
 
-class MovieAdapter : ListAdapter<MovieEntity, MovieAdapter.ViewHolder>(MovieDiffCallBack()) {
+class MovieAdapter(
+    private val onMovieClick: (MovieEntity) -> Unit
+) : ListAdapter<MovieEntity, MovieAdapter.ViewHolder>(MovieDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding).apply {
+            binding.ivMovie.setOnClickListener {
+                movie?.let(onMovieClick::invoke)
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -24,7 +30,10 @@ class MovieAdapter : ListAdapter<MovieEntity, MovieAdapter.ViewHolder>(MovieDiff
     class ViewHolder(
         private val binding: ItemMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        var movie: MovieEntity? = null
         fun bindView(movie: MovieEntity) {
+            this.movie = movie
             with(binding) {
                 tvTitle.text = movie.title
                 Glide.with(itemView)
