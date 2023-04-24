@@ -24,4 +24,9 @@ class MovieRepository(
         emit(movieApi.getTopRatedMovies().results)
     }
         .flowOn(ioDispatcher)
+
+    fun getTrailerVideos(movieId: Int): Flow<List<VideoEntity>> = flow {
+        emit(movieApi.getVideoTrailers(movieId).results)
+    }
+        .flowOn(ioDispatcher)
 }
