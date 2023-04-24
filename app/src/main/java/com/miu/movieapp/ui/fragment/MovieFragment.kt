@@ -1,5 +1,6 @@
 package com.miu.movieapp.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentMovieBinding
 import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.viewModelProviderFactoryOf
+import com.miu.movieapp.ui.activity.MovieDetailActivity
 import com.miu.movieapp.ui.adapter.CategoryMovieAdapter
 import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
@@ -34,7 +36,10 @@ class MovieFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         movieCategoryAdapter = CategoryMovieAdapter(
             onMovieClick = {
-                Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+             //   Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, MovieDetailActivity::class.java)
+                intent.putExtra("movie", it)
+                startActivity(intent)
             }
         )
         binding.rvMovie.adapter = movieCategoryAdapter
