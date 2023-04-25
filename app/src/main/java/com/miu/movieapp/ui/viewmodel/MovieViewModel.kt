@@ -3,7 +3,9 @@ package com.miu.movieapp.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.data.MovieRepository
 import com.miu.movieapp.ui.uimodel.CategoryMovie
 import com.miu.movieapp.ui.uimodel.MovieViewType
@@ -19,6 +21,11 @@ class MovieViewModel(
 
     private val _categoryMovies = MutableLiveData<List<CategoryMovie>>()
     val categoryMovies: LiveData<List<CategoryMovie>> = _categoryMovies
+
+    private val _movieEntities = _categoryMovies.map {
+        it.flatMap(CategoryMovie::movies)
+    }
+    val movieEntities: LiveData<List<MovieEntity>> = _movieEntities
 
     init {
         getMovies()

@@ -3,7 +3,6 @@ package com.miu.movieapp.ui.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miu.movieapp.R
@@ -15,7 +14,7 @@ import com.miu.movieapp.ui.adapter.CategoryMovieAdapter
 import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 class MovieFragment : BaseFragment() {
-    lateinit var binding: FragmentMovieBinding
+    private lateinit var binding: FragmentMovieBinding
 
     private lateinit var movieCategoryAdapter: CategoryMovieAdapter
 
@@ -36,7 +35,6 @@ class MovieFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         movieCategoryAdapter = CategoryMovieAdapter(
             onMovieClick = {
-             //   Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity, MovieDetailActivity::class.java)
                 intent.putExtra("movie", it)
                 startActivity(intent)
@@ -44,8 +42,6 @@ class MovieFragment : BaseFragment() {
         )
         binding.rvMovie.adapter = movieCategoryAdapter
         binding.rvMovie.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.categoryMovies.observe(viewLifecycleOwner) {
-            movieCategoryAdapter.submitList(it)
-        }
+        viewModel.categoryMovies.observe(viewLifecycleOwner, movieCategoryAdapter::submitList)
     }
 }
