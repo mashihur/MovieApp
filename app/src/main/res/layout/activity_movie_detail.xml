@@ -8,16 +8,16 @@
     <FrameLayout
         android:id="@+id/mediaPlayerContainer"
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <VideoView
+        <WebView
             android:id="@+id/videoView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp" />
 
     </FrameLayout>
 
