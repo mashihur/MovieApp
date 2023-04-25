@@ -2,25 +2,43 @@ package com.miu.movieapp.ui.fragment
 
 import android.content.DialogInterface
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
+import androidx.fragment.app.activityViewModels
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentGameBinding
 import com.miu.movieapp.other.GameState
+import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.HangManHelper
+import com.miu.movieapp.other.viewModelProviderFactoryOf
+import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 
 class GameFragment : BaseFragment() {
-    lateinit var binding : FragmentGameBinding
+    lateinit var binding: FragmentGameBinding
     private val gameHelper = HangManHelper()
+
+    private val movieViewModel by activityViewModels<MovieViewModel> {
+        viewModelProviderFactoryOf { MovieViewModel(Graph.movieRepository) }
+    }
 
     override fun onCreateView(): View {
         binding = FragmentGameBinding.bind(rootView)
         initCommon()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        movieViewModel.movieEntities.observe(viewLifecycleOwner) {
+            // TODO
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun initCommon() {
