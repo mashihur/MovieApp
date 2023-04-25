@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.data.MovieRepository
 import com.miu.movieapp.data.VideoEntity
 import com.miu.movieapp.ui.uimodel.CategoryMovie
@@ -18,10 +19,19 @@ class MovieDetailViewModel(
 
     private val _movieVideos = MutableLiveData<List<VideoEntity>>()
     val movieVideos: LiveData<List<VideoEntity>> = _movieVideos
+    lateinit var movieItem: MovieEntity
 
     init {
 
     }
+
+    fun updateMovie(movie: MovieEntity) {
+        movieItem = movie
+    }
+
+    fun getTitle() = movieItem.title
+
+    fun getDesc() = movieItem.overview
 
 
     fun getTrailerVideos(movieid: Int) {
@@ -32,6 +42,7 @@ class MovieDetailViewModel(
         }
             .catch {
                 // TODO: handle error
+                println(it)
             }
             .launchIn(viewModelScope)
     }

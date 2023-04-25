@@ -5,7 +5,7 @@ import androidx.room.Entity
 import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
-@Entity
+
 @Parcelize
 data class VideoEntity(
     @field:Json(name = "name")

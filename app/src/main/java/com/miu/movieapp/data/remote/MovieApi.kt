@@ -15,6 +15,6 @@ interface MovieApi {
     suspend fun getTopRatedMovies(): MovieResponse
 
     //to get trailer video for selected movie
-    @GET("movie/{movieId}/videos?api_key=${Constants.API_KEY}")
+    @GET("movie/{id}/videos?api_key=${Constants.API_KEY}")
     suspend fun getVideoTrailers(@Path("id") id: Int): VideoResponse
 }
