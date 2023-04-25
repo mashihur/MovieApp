@@ -10,6 +10,8 @@
         style="@style/TextAppearance.Material3.HeadlineSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         tools:text="@string/now_playing" />
 
     <androidx.recyclerview.widget.RecyclerView

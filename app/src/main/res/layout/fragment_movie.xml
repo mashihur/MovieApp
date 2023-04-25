@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rv_movie"
     android:layout_width="match_parent"
+    android:background="@color/movie_list_bg_color"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
-    android:padding="12dp"
+    android:padding="5dp"
     tools:context=".ui.fragment.MovieFragment" />

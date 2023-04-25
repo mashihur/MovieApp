@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#FF3700B3</color>
+    <color name="movie_list_bg_color">#041D35</color>
 </resources>
