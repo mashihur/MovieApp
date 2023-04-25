@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
@@ -37,7 +36,6 @@ class GameFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         movieViewModel.movieEntities.observe(viewLifecycleOwner) {
             // TODO
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
