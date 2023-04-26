@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miu.movieapp.R
 import com.miu.movieapp.data.MovieEntity
-import com.miu.movieapp.data.local.MovieDatabase
 import com.miu.movieapp.data.local.MovieItem
 import com.miu.movieapp.other.Helpers
 import com.miu.movieapp.ui.activity.MovieDetailActivity
@@ -39,7 +38,7 @@ class FavoriteAdapter(private val onMovieClick: (MovieItem) -> Unit, var context
         }
         holder.ib.setOnClickListener {
             movies.remove(movie)
-            movie?.let(onMovieClick::invoke)
+            movie.let(onMovieClick::invoke)
             notifyDataSetChanged()
         }
     }
