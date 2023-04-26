@@ -38,7 +38,7 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.getTrailers(movie?.id ?: 0)
 
         viewModel.movieEntity.observe(this, Observer {
-            binding.title.text = it?.title
+            binding.title.text = it?.originalTitle
             binding.description.text = it?.overview
             binding.ratingStar.numStars = 5
             binding.ratingStar.stepSize = 0.5f

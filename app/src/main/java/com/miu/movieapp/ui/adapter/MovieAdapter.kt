@@ -35,7 +35,7 @@ class MovieAdapter(
         fun bindView(movie: MovieEntity) {
             this.movie = movie
             with(binding) {
-                tvTitle.text = movie.title
+                tvTitle.text = movie.originalTitle
                 Glide.with(itemView)
                     .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
                     .into(ivMovie)

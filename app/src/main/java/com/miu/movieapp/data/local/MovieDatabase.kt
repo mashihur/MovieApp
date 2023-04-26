@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase
     version = 1
 )
 abstract class MovieDatabase: RoomDatabase() { // Must Inherit from RoomDatabase
-    abstract fun getNoteDao(): MovieDao // Need this function to get the Dao for the Entity
+    abstract fun getMovieDao(): MovieDao // Need this function to get the Dao for the Entity
 
     // Build RoomDB
     companion object {
@@ -45,7 +45,7 @@ abstract class MovieDatabase: RoomDatabase() { // Must Inherit from RoomDatabase
         private fun buildDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
             MovieDatabase::class.java,
-            "notedatabase"
+            "movie_database"
         ).build()
     }
 }
