@@ -37,9 +37,13 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.updateMovie(movie!!)
 
 
-        viewModel.getTrailerVideos(movie?.id ?: 0)
-        binding.title.text = viewModel.getTitle()
-        binding.description.text = viewModel.getDesc()
+        viewModel.getTrailers(movie?.id ?: 0)
+
+        viewModel.movieEntity.observe(this, Observer {
+            binding.title.text = it?.title
+            binding.description.text = it?.overview
+            binding.ratingLabel.text = it?.popularity.toString()
+        })
 
         viewModel.movieVideos.observe(this, Observer {
             it.first().let {
@@ -50,7 +54,5 @@ class MovieDetailActivity : AppCompatActivity() {
                 binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}")
             }
         })
-
-
     }
 }
