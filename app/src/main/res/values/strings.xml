@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieApp</string>
+    <string name="app_name">Hangman:MovieFinder</string>
     <string name="movie">Movie</string>
     <string name="favorite">Favorite</string>
     <string name="game">Game</string>
