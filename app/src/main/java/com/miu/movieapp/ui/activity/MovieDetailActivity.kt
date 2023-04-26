@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miu.movieapp.R
 import com.miu.movieapp.data.MovieEntity
+import com.miu.movieapp.data.local.MovieDao
 import com.miu.movieapp.databinding.ActivityMovieDetailBinding
 import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.viewModelProviderFactoryOf
@@ -47,10 +48,15 @@ class MovieDetailActivity : AppCompatActivity() {
             binding.ratingStar.rating = (movie.voteAverage * 0.5).toFloat()
         })
 
+        viewModel.movieFromDb.observe(this, Observer {
+            isFavorite = viewModel.movieFromDb.value ?: false
+            resetFavIcon()
+        })
+
+        viewModel.getMovieFromDB(this)
         resetFavIcon()
         binding.favoriteIcon.setOnClickListener {
-            isFavorite = !isFavorite
-            resetFavIcon()
+            viewModel.addMovieToDB(this)
         }
 
         viewModel.movieVideos.observe(this, Observer {
