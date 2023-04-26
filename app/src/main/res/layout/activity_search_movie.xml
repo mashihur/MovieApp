@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efefef"
     tools:context=".ui.activity.SearchMovieActivity">
 
     <SearchView
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:queryHint="@string/search_movie"
         />
 
     <androidx.recyclerview.widget.RecyclerView

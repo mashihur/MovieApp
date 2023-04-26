@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.miu.movieapp.R
 import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ActivityMovieDetailBinding
 import com.miu.movieapp.other.Graph
@@ -17,6 +18,7 @@ import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
+    var isFavorite = false
 
     private val viewModel: MovieDetailViewModel by viewModels {
         viewModelProviderFactoryOf { MovieDetailViewModel(Graph.movieRepository) }
@@ -45,6 +47,12 @@ class MovieDetailActivity : AppCompatActivity() {
             binding.ratingStar.rating = (movie.voteAverage * 0.5).toFloat()
         })
 
+        resetFavIcon()
+        binding.favoriteIcon.setOnClickListener {
+            isFavorite = !isFavorite
+            resetFavIcon()
+        }
+
         viewModel.movieVideos.observe(this, Observer {
             it.first().let {
                 binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}&c=1")
@@ -58,5 +66,13 @@ class MovieDetailActivity : AppCompatActivity() {
                 binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}&c=1")
             }
         })
+    }
+
+    fun resetFavIcon() {
+        if (isFavorite) {
+            binding.favoriteIcon.setImageResource(R.drawable.baseline_favorite_24)
+        } else {
+            binding.favoriteIcon.setImageResource(R.drawable.baseline_unfavorite)
+        }
     }
 }
