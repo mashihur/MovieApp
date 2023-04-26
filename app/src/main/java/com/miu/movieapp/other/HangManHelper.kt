@@ -1,23 +1,38 @@
 package com.miu.movieapp.other
 
-import com.miu.movieapp.R
+import android.net.Uri
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlin.random.Random
 
-class HangManHelper {
+class HangManHelper: ViewModel() {
 
     private lateinit var underscoreWord: String
     private lateinit var wordToGuess: String
     private val maxTries = Constants.imgHangMan.size
     private var currentTries = 0
     private var drawable: Int = Constants.imgHangMan[0]
+    private var selectedIndex = 0
     var drawableVideo: String = ""
+
+
+    fun getWebViewLink(): String {
+        val uri = Uri.parse(drawableVideo)
+        val youtubeid = uri.getQueryParameter("v") ?: "-"
+        return "file:///android_asset/index.html?v=$youtubeid"
+    }
 
     fun startNewGame(): GameState {
         currentTries = 0
         drawable = Constants.imgHangMan[0]
-        val randomIndex = Random.nextInt(0, Constants.movieNames.size)
-        wordToGuess = Constants.movieNames[randomIndex].replace(" ", "")
-        drawableVideo = Constants.videoNames[randomIndex]
+        selectedIndex = Random.nextInt(0, Constants.movieNames.size)
+        val nonAlphabet = "[^a-zA-Z]".toRegex()
+        wordToGuess = Constants.movieNames[selectedIndex].replace(nonAlphabet, "")
+        drawableVideo = Constants.videoNames[selectedIndex]
         generateUnderscores(wordToGuess)
         return getGameState()
     }
@@ -80,5 +95,33 @@ class HangManHelper {
 
         drawable = getHangmanDrawable()
         return GameState.Running(underscoreWord, drawable)
+    }
+
+    fun removeCurrentVideo() {
+        Constants.movieNames.removeAt(selectedIndex)
+        Constants.videoNames.removeAt(selectedIndex)
+    }
+
+    fun getTrailerVideos(movieTitle: String, movieid: Int) {
+        val repository = Graph.movieRepository
+        var isFoundLink = false
+
+        repository.getTrailerVideos(movieid)
+            .onEach {
+                for (item in it) {
+                    if (isFoundLink.not() && item.site == "YouTube") {
+                        Constants.movieNames += movieTitle
+                        Constants.videoNames += "https://www.youtube.com/watch?v=${item.key}"
+                        isFoundLink = true
+                        break
+                    }
+                }
+                println(it)
+            }
+            .catch {
+                // TODO: handle error
+                println(it)
+            }
+            .launchIn(viewModelScope)
     }
 }

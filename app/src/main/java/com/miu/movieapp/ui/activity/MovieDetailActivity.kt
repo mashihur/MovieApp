@@ -14,7 +14,6 @@ import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.viewModelProviderFactoryOf
 import com.miu.movieapp.ui.adapter.VideoAdapter
 import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
-import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 class MovieDetailActivity : AppCompatActivity() {
 
