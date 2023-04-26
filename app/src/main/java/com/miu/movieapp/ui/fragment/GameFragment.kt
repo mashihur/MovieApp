@@ -6,21 +6,29 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.miu.movieapp.R
+import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.FragmentGameBinding
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.HangManHelper
 import com.miu.movieapp.other.viewModelProviderFactoryOf
+import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
 import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 
 class GameFragment : BaseFragment() {
     lateinit var binding: FragmentGameBinding
-    private val gameHelper = HangManHelper()
+    var movieList: ArrayList<MovieEntity>? = null
+
+    private val viewModel: HangManHelper by viewModels {
+        viewModelProviderFactoryOf { HangManHelper() }
+    }
 
     private val movieViewModel by activityViewModels<MovieViewModel> {
         viewModelProviderFactoryOf { MovieViewModel(Graph.movieRepository) }
@@ -36,6 +44,10 @@ class GameFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         movieViewModel.movieEntities.observe(viewLifecycleOwner) {
             // TODO
+            if (movieList == null) {
+                movieList = ArrayList(it)
+                loadNewMovie()
+            }
         }
     }
 
@@ -52,7 +64,7 @@ class GameFragment : BaseFragment() {
         binding.lettersLayout.children.forEach { letterView ->
             if (letterView is TextView) {
                 letterView.setOnClickListener {
-                    val gameState = gameHelper.play((letterView).text[0])
+                    val gameState = viewModel.play((letterView).text[0])
                     updateUI(gameState)
                     letterView.visibility = View.INVISIBLE
                 }
@@ -84,6 +96,7 @@ class GameFragment : BaseFragment() {
 
     private fun showGameWon(wordToGuess: String) {
         showAlert("Hooray!!!" , "You won")
+        viewModel.removeCurrentVideo()
         binding.webview.loadUrl("javascript:endVideo();")
         binding.userinput.text = wordToGuess
         binding.lettersLayout.visibility = View.GONE
@@ -101,17 +114,27 @@ class GameFragment : BaseFragment() {
         }
     }
 
+    fun loadNewMovie() {
+        if (movieList != null) {
+            movieList?.first().let {
+                viewModel.getTrailerVideos(it?.originalTitle ?: "null", it?.id ?: 0)
+                movieList?.remove(it)
+            }
+        }
+    }
+
     private fun startNewGame() {
         //binding.videoplayer.stopPlayback()
-        val gameState = gameHelper.startNewGame()
+        loadNewMovie()
+
+
+        val gameState = viewModel.startNewGame()
         binding.lettersLayout.visibility = View.VISIBLE
         binding.lettersLayout.children.forEach { letterView ->
             letterView.visibility = View.VISIBLE
         }
-        val uri = Uri.parse(gameHelper.drawableVideo)
-        val youtubeid = uri.getQueryParameter("v") ?: "-"
         binding.webview.loadUrl("about:blank")
-        binding.webview.loadUrl("file:///android_asset/index.html?v=$youtubeid")
+        binding.webview.loadUrl(viewModel.getWebViewLink())
         updateUI(gameState)
     }
 

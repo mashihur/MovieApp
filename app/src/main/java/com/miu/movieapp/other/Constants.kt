@@ -7,7 +7,7 @@ object Constants {
     //Max video trailer seconds
     var trailerSeconds = 10
 
-    var movieNames = arrayOf(
+    var movieNames = mutableListOf(
         "avatar",
         "jumanji",
         "good dino",
@@ -18,7 +18,7 @@ object Constants {
         "the mummy"
     )
 
-    var videoNames = arrayOf(
+    var videoNames = mutableListOf(
         "https://www.youtube.com/watch?v=5PSNL1qE6VY",
         "https://www.youtube.com/watch?v=2QKg5SZ_35I",
         "https://www.youtube.com/watch?v=O-RgquKVTPE&t=5s",
