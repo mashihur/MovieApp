@@ -44,7 +44,7 @@ class MovieDetailActivity : AppCompatActivity() {
             binding.description.text = it?.overview
             binding.ratingStar.numStars = 5
             binding.ratingStar.stepSize = 0.5f
-            binding.ratingStar.rating = (4 * 0.5).toFloat()
+            binding.ratingStar.rating = (movie.voteAverage * 0.5).toFloat()
         })
 
         viewModel.movieVideos.observe(this, Observer {
