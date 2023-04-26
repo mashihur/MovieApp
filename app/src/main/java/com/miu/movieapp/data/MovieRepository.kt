@@ -29,4 +29,9 @@ class MovieRepository(
         emit(movieApi.getVideoTrailers(movieId).results)
     }
         .flowOn(ioDispatcher)
+
+    fun searchMovies(query: String): Flow<List<MovieEntity>> = flow {
+        emit(movieApi.searchMovies(query).results)
+    }
+        .flowOn(ioDispatcher)
 }

@@ -1,6 +1,8 @@
 package com.miu.movieapp.ui.activity
 
+import android.content.Intent
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.SearchView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,10 +45,21 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
-        val searchView = menu.findItem(R.id.menu_item_search).actionView as SearchView
-        searchView.queryHint = getString(R.string.search_movie)
-        searchView.setOnQueryTextListener(this)
+
+//        val searchView = menu.findItem(R.id.menu_item_search).actionView as SearchView
+//        searchView.queryHint = getString(R.string.search_movie)
+//        searchView.setOnQueryTextListener(this)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_item_search -> {
+                val intent = Intent(this, SearchMovieActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

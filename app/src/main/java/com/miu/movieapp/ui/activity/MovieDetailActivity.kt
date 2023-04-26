@@ -1,12 +1,7 @@
 package com.miu.movieapp.ui.activity
 
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
-import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import android.widget.FrameLayout
-import android.widget.VideoView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
