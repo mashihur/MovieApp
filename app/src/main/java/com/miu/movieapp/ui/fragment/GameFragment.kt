@@ -1,12 +1,10 @@
 package com.miu.movieapp.ui.fragment
 
 import android.content.DialogInterface
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
@@ -16,9 +14,8 @@ import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.FragmentGameBinding
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.Graph
-import com.miu.movieapp.other.HangManHelper
+import com.miu.movieapp.ui.viewmodel.HangManHelper
 import com.miu.movieapp.other.viewModelProviderFactoryOf
-import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
 import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentSciBinding
 import com.miu.movieapp.other.GameState
-import com.miu.movieapp.other.HangManHelper
+import com.miu.movieapp.ui.viewmodel.HangManHelper
 import com.miu.movieapp.other.viewModelProviderFactoryOf
 import kotlin.random.Random
 

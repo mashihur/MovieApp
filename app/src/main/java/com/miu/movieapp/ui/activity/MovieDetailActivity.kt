@@ -1,12 +1,14 @@
 package com.miu.movieapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import android.widget.ArrayAdapter
-import android.widget.MediaController
+import android.widget.FrameLayout
+import android.widget.VideoView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miu.movieapp.data.MovieEntity
@@ -15,6 +17,7 @@ import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.viewModelProviderFactoryOf
 import com.miu.movieapp.ui.adapter.VideoAdapter
 import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
+
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -49,7 +52,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         viewModel.movieVideos.observe(this, Observer {
             it.first().let {
-                binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}")
+                binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}&c=1")
             }
 
 
@@ -57,7 +60,7 @@ class MovieDetailActivity : AppCompatActivity() {
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
             binding.listview.adapter = VideoAdapter(this, it) {
-                binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}")
+                binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}&c=1")
             }
         })
     }

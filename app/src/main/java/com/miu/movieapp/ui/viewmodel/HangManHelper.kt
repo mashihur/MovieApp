@@ -1,9 +1,11 @@
-package com.miu.movieapp.other
+package com.miu.movieapp.ui.viewmodel
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.miu.movieapp.ui.viewmodel.MovieDetailViewModel
+import com.miu.movieapp.other.Constants
+import com.miu.movieapp.other.GameState
+import com.miu.movieapp.other.Graph
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
