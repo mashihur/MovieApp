@@ -6,17 +6,23 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.children
+import androidx.fragment.app.viewModels
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentSciBinding
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.HangManHelper
+import com.miu.movieapp.other.viewModelProviderFactoryOf
 import kotlin.random.Random
 
 
 class SciFragment : BaseFragment() {
     // TODO: Rename and change types of parameters
     lateinit var binding : FragmentSciBinding
-    private val gameHelper = HangManHelper()
+
+    private val viewModel: HangManHelper by viewModels {
+        viewModelProviderFactoryOf { HangManHelper() }
+    }
+
     var principleNames = mutableListOf("")
     var principleAns = mutableListOf("")
     var currentIndex = 0
@@ -46,7 +52,7 @@ class SciFragment : BaseFragment() {
         binding.lettersLayout.children.forEach { letterView ->
             if (letterView is TextView) {
                 letterView.setOnClickListener {
-                    val gameState = gameHelper.play((letterView).text[0])
+                    val gameState = viewModel.play((letterView).text[0])
                     updateUI(gameState)
                     letterView.visibility = View.INVISIBLE
                 }
@@ -93,7 +99,7 @@ class SciFragment : BaseFragment() {
 
     private fun startNewGame() {
         currentIndex = Random.nextInt(0, principleAns.size)
-        val gameState = gameHelper.startSCIGame(principleAns[currentIndex])
+        val gameState = viewModel.startSCIGame(principleAns[currentIndex])
         binding.hintWord.text = principleNames[currentIndex]
         binding.lettersLayout.visibility = View.VISIBLE
         binding.lettersLayout.children.forEach { letterView ->

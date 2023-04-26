@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.ActivityMovieDetailBinding
 import com.miu.movieapp.other.Graph
@@ -39,17 +40,22 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.getTrailerVideos(movie?.id ?: 0)
         binding.title.text = viewModel.getTitle()
         binding.description.text = viewModel.getDesc()
+        binding.ratingStar.numStars = 5
+        binding.ratingStar.stepSize = 0.5f
+        binding.ratingStar.rating = movie.voteAverage.toFloat() % 5
 
         viewModel.movieVideos.observe(this, Observer {
             it.first().let {
                 binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}")
             }
 
+
+            binding.listview.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
             binding.listview.adapter = VideoAdapter(this, it) {
                 binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}")
             }
         })
-
-
     }
 }

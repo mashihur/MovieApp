@@ -20,11 +20,6 @@ class MovieDetailViewModel(
     private val _movieVideos = MutableLiveData<List<VideoEntity>>()
     val movieVideos: LiveData<List<VideoEntity>> = _movieVideos
     lateinit var movieItem: MovieEntity
-    val movieEntity = MutableLiveData<MovieEntity>()
-
-    init {
-
-    }
 
     fun updateMovie(movie: MovieEntity) {
         movieItem = movie
