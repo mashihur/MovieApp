@@ -22,6 +22,10 @@ class MovieViewModel(
     private val _categoryMovies = MutableLiveData<List<CategoryMovie>>()
     val categoryMovies: LiveData<List<CategoryMovie>> = _categoryMovies
 
+    private val _searchMovies = MutableLiveData<List<CategoryMovie>>()
+    val searchMovies: LiveData<List<CategoryMovie>> = _searchMovies
+
+
     private val _movieEntities = _categoryMovies.map {
         it.flatMap(CategoryMovie::movies)
     }
@@ -35,6 +39,9 @@ class MovieViewModel(
         getNowPlayingMovies()
         getPopularMovies()
         getTopRatedMovies()
+    }
+
+    fun searchMovies(name: String) {
     }
 
     private fun getNowPlayingMovies() {

@@ -1,13 +1,15 @@
 package com.miu.movieapp.ui.activity
 
+import android.view.Menu
+import android.widget.SearchView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.ActivityMainBinding
 import com.miu.movieapp.ui.adapter.MyPageAdapter
 
-class MainActivity : BaseActivity() {
-    lateinit var binding : ActivityMainBinding
+class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreateActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -16,8 +18,8 @@ class MainActivity : BaseActivity() {
         val adapter = MyPageAdapter(this)
         binding.viewPager.adapter = adapter
         binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab,position ->
-            when(position){
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (position) {
                 0->{
                     tab.text = resources.getString(R.string.movie)
                     tab.setIcon(R.drawable.baseline_movie_24)
@@ -30,7 +32,8 @@ class MainActivity : BaseActivity() {
                     tab.text = resources.getString(R.string.game)
                     tab.setIcon(R.drawable.baseline_game_24)
                 }
-                3->{
+
+                3 -> {
                     tab.text = resources.getString(R.string.sci)
                     tab.setIcon(R.drawable.baseline_game_24)
                 }
@@ -38,6 +41,22 @@ class MainActivity : BaseActivity() {
         }.attach()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        val searchView = menu.findItem(R.id.menu_item_search).actionView as SearchView
+        searchView.queryHint = getString(R.string.search_movie)
+        searchView.setOnQueryTextListener(this)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        // TODO
+        return true
+    }
 }
 
 
