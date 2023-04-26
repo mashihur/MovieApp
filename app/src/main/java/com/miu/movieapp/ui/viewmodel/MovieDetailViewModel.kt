@@ -29,15 +29,4 @@ class MovieDetailViewModel(
                 println(it)
             }.launchIn(viewModelScope)
     }
-
-    fun getTrailerVideos(movieid: Int) {
-        repository.getTrailerVideos(movieid)
-        .onEach {
-            _movieVideos.value = it
-            println(it)
-        }.catch {
-            // TODO: handle error
-            println(it)
-        }.launchIn(viewModelScope)
-    }
 }
