@@ -27,17 +27,27 @@ class MovieDetailViewModel(
         viewModelScope.launch {
             movieEntity.value?.let {
                 val item = MovieDatabase.invoke(context).getMovieDao().getMovieItemByVideoId(movieEntity.value?.id ?: 0)
-                movieFromDb.value = (item == null)
+                movieFromDb.value = (item != null)
             }
         }
     }
 
     fun addMovieToDB(context: Context) {
         viewModelScope.launch {
-            movieEntity.value?.let {
-                val item = MovieItem(it.id, it.originalTitle, it.posterPath, it.overview, it.voteAverage)
-                MovieDatabase.invoke(context).getMovieDao().addMovieItem(item)
+            if (movieFromDb.value == true) {
+                movieEntity.value?.let {
+                    val item = MovieDatabase.invoke(context).getMovieDao().getMovieItemByVideoId(movieEntity.value?.id ?: 0)
+                    MovieDatabase.invoke(context).getMovieDao().deleteMovieItem(item)
+                    movieFromDb.value = false
+                }
+            } else {
+                movieEntity.value?.let {
+                    val item = MovieItem(it.id, it.originalTitle, it.posterPath, it.overview, it.voteAverage)
+                    MovieDatabase.invoke(context).getMovieDao().addMovieItem(item)
+                    movieFromDb.value = true
+                }
             }
+
         }
     }
 
