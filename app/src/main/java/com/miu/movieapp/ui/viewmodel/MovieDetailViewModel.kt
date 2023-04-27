@@ -23,46 +23,19 @@ class MovieDetailViewModel(
     val movieEntity = MutableLiveData<MovieEntity>()
     val movieFromDb = MutableLiveData<Boolean>()
 
-
-
     fun toggleFavoriteMovie(context: Context) {
         viewModelScope.launch {
             movieEntity.value?.let {
-                val item = MovieDatabase.invoke(context).getMovieDao().getMovieItemByVideoId(movieEntity.value?.id ?: 0)
                 if (movieFromDb.value == true) {
-                    MovieDatabase.invoke(context).getMovieDao().deleteMovieItem(item)
-                } else {
-                    MovieDatabase.invoke(context).getMovieDao().addMovieItem(item)
-                }
-            }
-        }
-    }
-
-    fun getMovie(context: Context) {
-        viewModelScope.launch {
-            movieEntity.value?.let {
-                val item = MovieDatabase.invoke(context).getMovieDao().getMovieItemByVideoId(movieEntity.value?.id ?: 0)
-                movieFromDb.value = (item != null)
-            }
-        }
-    }
-
-    fun addMovie(context: Context) {
-        viewModelScope.launch {
-            if (movieFromDb.value == true) {
-                movieEntity.value?.let {
                     val item = MovieDatabase.invoke(context).getMovieDao().getMovieItemByVideoId(movieEntity.value?.id ?: 0)
                     MovieDatabase.invoke(context).getMovieDao().deleteMovieItem(item)
                     movieFromDb.value = false
-                }
-            } else {
-                movieEntity.value?.let {
+                } else {
                     val item = MovieItem(it.id, it.originalTitle, it.posterPath, it.overview, it.voteAverage)
                     MovieDatabase.invoke(context).getMovieDao().addMovieItem(item)
                     movieFromDb.value = true
                 }
             }
-
         }
     }
 
