@@ -23,7 +23,7 @@ class MovieDetailViewModel(
     val movieEntity = MutableLiveData<MovieEntity>()
     val movieFromDb = MutableLiveData<Boolean>()
 
-    fun getMovieFromDB(context: Context) {
+    fun getMovie(context: Context) {
         viewModelScope.launch {
             movieEntity.value?.let {
                 val item = MovieDatabase.invoke(context).getMovieDao().getMovieItemByVideoId(movieEntity.value?.id ?: 0)
@@ -32,7 +32,7 @@ class MovieDetailViewModel(
         }
     }
 
-    fun addMovieToDB(context: Context) {
+    fun addMovie(context: Context) {
         viewModelScope.launch {
             if (movieFromDb.value == true) {
                 movieEntity.value?.let {

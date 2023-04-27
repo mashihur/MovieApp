@@ -53,10 +53,10 @@ class MovieDetailActivity : AppCompatActivity() {
             resetFavIcon()
         })
 
-        viewModel.getMovieFromDB(this)
+        viewModel.getMovie(this)
         resetFavIcon()
         binding.favoriteIcon.setOnClickListener {
-            viewModel.addMovieToDB(this)
+            viewModel.addMovie(this)
         }
 
         viewModel.movieVideos.observe(this, Observer {
