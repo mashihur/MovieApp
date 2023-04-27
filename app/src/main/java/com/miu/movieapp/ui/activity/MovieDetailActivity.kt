@@ -6,10 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdRequest
 import com.miu.movieapp.R
 import com.miu.movieapp.data.MovieEntity
-import com.miu.movieapp.data.local.MovieDao
 import com.miu.movieapp.databinding.ActivityMovieDetailBinding
 import com.miu.movieapp.other.Graph
 import com.miu.movieapp.other.viewModelProviderFactoryOf
@@ -71,9 +69,6 @@ class MovieDetailActivity : AppCompatActivity() {
                 binding.videoView.loadUrl("file:///android_asset/index.html?v=${it.key}&c=1")
             }
         })
-
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
     }
 
     fun resetFavIcon() {
