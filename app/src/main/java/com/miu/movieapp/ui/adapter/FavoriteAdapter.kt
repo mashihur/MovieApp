@@ -34,6 +34,7 @@ class FavoriteAdapter(private val onMovieClick: (MovieItem) -> Unit, var context
         holder.rl.setOnClickListener {
             val intent = Intent(context, MovieDetailActivity::class.java)
             intent.putExtra("movie", MovieEntity(movie.videoId, movie.title, movie.description, movie.imagePath, movie.voting))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
         holder.ib.setOnClickListener {
