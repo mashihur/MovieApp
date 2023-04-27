@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.FragmentMovieBinding
 import com.miu.movieapp.other.Graph
+import com.miu.movieapp.other.toastShort
 import com.miu.movieapp.other.viewModelProviderFactoryOf
 import com.miu.movieapp.ui.activity.MovieDetailActivity
 import com.miu.movieapp.ui.adapter.CategoryMovieAdapter
@@ -43,5 +44,8 @@ class MovieFragment : BaseFragment() {
         binding.rvMovie.adapter = movieCategoryAdapter
         binding.rvMovie.layoutManager = LinearLayoutManager(requireContext())
         viewModel.categoryMovies.observe(viewLifecycleOwner, movieCategoryAdapter::submitList)
+        viewModel.error.observe(viewLifecycleOwner) {
+            requireContext().toastShort(getString(R.string.load_movies_error))
+        }
     }
 }

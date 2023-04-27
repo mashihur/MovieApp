@@ -14,8 +14,8 @@ import com.miu.movieapp.data.MovieEntity
 import com.miu.movieapp.databinding.FragmentGameBinding
 import com.miu.movieapp.other.GameState
 import com.miu.movieapp.other.Graph
-import com.miu.movieapp.ui.viewmodel.HangManHelper
 import com.miu.movieapp.other.viewModelProviderFactoryOf
+import com.miu.movieapp.ui.viewmodel.HangManHelper
 import com.miu.movieapp.ui.viewmodel.MovieViewModel
 
 
@@ -40,7 +40,6 @@ class GameFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieViewModel.movieEntities.observe(viewLifecycleOwner) {
-            // TODO
             if (movieList == null) {
                 movieList = ArrayList(it)
                 loadNewMovie()

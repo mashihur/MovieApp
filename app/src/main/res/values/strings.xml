@@ -51,4 +51,5 @@
     <string name="search_movie">Search movie</string>
     <string name="banner_app_id">ca-app-pub-3033539562571381~1271135240</string>
     <string name="banner_ad_unit_id">ca-app-pub-3033539562571381/6331890234</string>
+    <string name="load_movies_error">"Cannot load movies. Please check your connection!"</string>
 </resources>

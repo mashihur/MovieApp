@@ -22,14 +22,13 @@ class MovieViewModel(
     private val _categoryMovies = MutableLiveData<List<CategoryMovie>>()
     val categoryMovies: LiveData<List<CategoryMovie>> = _categoryMovies
 
-    private val _searchMovies = MutableLiveData<List<CategoryMovie>>()
-    val searchMovies: LiveData<List<CategoryMovie>> = _searchMovies
-
-
     private val _movieEntities = _categoryMovies.map {
         it.flatMap(CategoryMovie::movies)
     }
     val movieEntities: LiveData<List<MovieEntity>> = _movieEntities
+
+    private val _error = MutableLiveData<Throwable>()
+    val error: LiveData<Throwable> = _error
 
     init {
         getMovies()
@@ -39,9 +38,6 @@ class MovieViewModel(
         getNowPlayingMovies()
         getPopularMovies()
         getTopRatedMovies()
-    }
-
-    fun searchMovies(name: String) {
     }
 
     private fun getNowPlayingMovies() {
@@ -73,7 +69,7 @@ class MovieViewModel(
             _categoryMovies.value = _categoryMovies.value.orEmpty().plus(it)
         }
             .catch {
-                // TODO: handle error
+                _error.value = it
             }
             .launchIn(viewModelScope)
     }
