@@ -35,7 +35,7 @@ class MovieDetailActivity : AppCompatActivity() {
         binding.videoView.settings.mediaPlaybackRequiresUserGesture = false
 
         val movie = intent.getParcelableExtra<MovieEntity>("movie")
-        viewModel.updateMovie(movie!!)
+        viewModel.updateMovie(this, movie!!)
 
 
         viewModel.getTrailers(movie?.id ?: 0)
@@ -53,10 +53,8 @@ class MovieDetailActivity : AppCompatActivity() {
             resetFavIcon()
         })
 
-        viewModel.getMovie(this)
-        resetFavIcon()
         binding.favoriteIcon.setOnClickListener {
-            viewModel.addMovie(this)
+            viewModel.toggleFavoriteMovie(this)
         }
 
         viewModel.movieVideos.observe(this, Observer {
