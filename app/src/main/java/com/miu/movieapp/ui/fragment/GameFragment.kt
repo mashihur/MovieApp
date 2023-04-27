@@ -150,4 +150,9 @@ class GameFragment : BaseFragment() {
         super.onPause()
         binding.webview.onPause()
     }
+
+    override fun onStop() {
+        super.onStop()
+        binding.webview.onPause()
+    }
 }

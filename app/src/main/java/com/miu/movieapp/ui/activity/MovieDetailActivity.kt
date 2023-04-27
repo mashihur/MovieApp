@@ -78,4 +78,19 @@ class MovieDetailActivity : AppCompatActivity() {
             binding.favoriteIcon.setImageResource(R.drawable.baseline_unfavorite)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.videoView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.videoView.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.videoView.onPause()
+    }
 }
