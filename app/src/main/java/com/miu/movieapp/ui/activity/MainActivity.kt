@@ -4,14 +4,18 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.miu.movieapp.R
 import com.miu.movieapp.databinding.ActivityMainBinding
 import com.miu.movieapp.ui.adapter.MyPageAdapter
 
+
 class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
     lateinit var binding: ActivityMainBinding
+
+
 
     override fun onCreateActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -20,6 +24,7 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
         val adapter = MyPageAdapter(this)
         binding.viewPager.adapter = adapter
         binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0->{
@@ -41,6 +46,10 @@ class MainActivity : BaseActivity(), SearchView.OnQueryTextListener {
                 }
             }
         }.attach()
+
+
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
